@@ -10,7 +10,7 @@ while (!isFinished)
 {
     int range, guesses = 1, guess = 0, secret;
 
-    // input validation 
+    // input validation using TryParse()
     Console.Write("Enter Max Range : ");
     while (!int.TryParse(Console.ReadLine(), out range))
     {
@@ -22,6 +22,7 @@ while (!isFinished)
 
     while (guess != secret)
     {
+        // input validation using TryParse()
         Console.Write("Enter Guess : ");
         if (!int.TryParse(Console.ReadLine(), out guess))
             continue;
@@ -39,7 +40,7 @@ while (!isFinished)
     }
 
     Console.WriteLine($"Yoy are correct in {guesses} guesses");
-
+    // asking to continue playing
     Console.Write("Wanna play again ? (Y/N) => ");
     
     if (Console.ReadLine().ToUpper() == "N")

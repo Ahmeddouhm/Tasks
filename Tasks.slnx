@@ -2,4 +2,5 @@
   <Project Path="Converter/Converter.csproj" Id="e565ebce-7189-4f00-a6ca-2951b0957c08" />
   <Project Path="Dice Game/Dice Game.csproj" />
   <Project Path="Number Guessing Game/Number Guessing Game.csproj" />
+  <Project Path="RPS Game/RPS Game.csproj" Id="cd1fd248-c120-4237-9a70-053687004552" />
 </Solution>

@@ -24,8 +24,10 @@ while (!isFinished)
     {
         // input validation using TryParse()
         Console.Write("Enter Guess : ");
-        if (!int.TryParse(Console.ReadLine(), out guess))
-            continue;
+        while (!int.TryParse(Console.ReadLine(), out guess))
+        {
+            Console.Write("[ERROR] Enter Guess : ");
+        }
 
         if (guess > secret)
         {
@@ -39,11 +41,12 @@ while (!isFinished)
         }
     }
 
-    Console.WriteLine($"Yoy are correct in {guesses} guesses");
+    Console.WriteLine($"You are correct in {guesses} guesses");
+
     // asking to continue playing
     Console.Write("Wanna play again ? (Y/N) => ");
     
-    if (Console.ReadLine().ToUpper() == "N")
+    if ((Console.ReadLine() ?? "").ToUpper() == "N")
     {
         isFinished = true;
     }

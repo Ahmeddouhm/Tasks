@@ -35,7 +35,7 @@ while (questionsIndex < questions.Count)
 
 	int answer = 0;
     Console.Write(">> ");
-    while (!int.TryParse((Console.ReadLine() ?? ""),out answer))
+    while (!int.TryParse((Console.ReadLine() ?? ""),out answer) || answer < 1 || answer > 3)
     {
 		Console.Write("[ERROR] >> ");
     }

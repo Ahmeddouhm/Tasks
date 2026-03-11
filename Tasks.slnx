@@ -6,4 +6,5 @@
   <Project Path="RPS Game/RPS Game.csproj" Id="cd1fd248-c120-4237-9a70-053687004552" />
   <Project Path="Simple Math Expression Evaluator/Simple Math Expression Evaluator.csproj" Id="d403272d-01ed-4845-9215-7893a49a11d5" />
   <Project Path="Simple ToDoList/Simple ToDoList.csproj" Id="33f8a223-a39e-4978-9471-31fbc19f1956" />
+  <Project Path="TicTacToe/TicTacToe.csproj" Id="2fb5018c-6c1d-479c-86df-bb2a0f29ee50" />
 </Solution>

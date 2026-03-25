@@ -21,27 +21,34 @@ bool gameWon = false;
 
 while (!gameWon)
 {
-    int choice1 ,choice2 = 0;
+    int choice1, choice2 = 0;
+
     PrintPlayingGrid();
+
     Console.Write(">> ");
     string input1 = (Console.ReadLine() ?? "");
-    while (!int.TryParse((input1), out choice1) || choice1 < 1 || choice1 > rows*cols)
+    while (!int.TryParse((input1), out choice1) || choice1 < 1 || choice1 > rows * cols)
     {
         Console.Write("[ERROR] >> ");
         input1 = (Console.ReadLine() ?? "");
     }
+
     playingGrid[choice1 - 1] = grid[choice1 - 1].ToString();
+
     Console.Clear();
 
     PrintPlayingGrid();
+
     Console.Write(">> ");
     string input2 = (Console.ReadLine() ?? "");
-    while (!int.TryParse((input2), out choice2) || choice2 == choice1|| choice2 < 1 || choice2 > rows * cols)
+    while (!int.TryParse((input2), out choice2) || choice2 == choice1 || choice2 < 1 || choice2 > rows * cols)
     {
         Console.Write("[ERROR] >> ");
         input2 = (Console.ReadLine() ?? "");
     }
+
     playingGrid[choice2 - 1] = grid[choice2 - 1].ToString();
+
     Console.Clear();
 
     PrintPlayingGrid();
@@ -50,10 +57,9 @@ while (!gameWon)
     {
         Console.WriteLine("Matched !");
         matches++;
+
         if (matches == (cols * rows / 2))
-        {
             gameWon = true;
-        }
     }
     else
     {
@@ -61,22 +67,21 @@ while (!gameWon)
         playingGrid[choice1 - 1] = choice1.ToString();
         playingGrid[choice2 - 1] = choice2.ToString();
     }
+
     Thread.Sleep(1000);
+
     Console.Clear();
 }
 
 Console.WriteLine("Congrats !");
 
-
-
-void PrintPlayingGrid() 
+void PrintPlayingGrid()
 {
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j++)
-        {
             Console.Write($"{playingGrid[cols * i + j]} | ");
-        }
+
         Console.WriteLine();
     }
 }

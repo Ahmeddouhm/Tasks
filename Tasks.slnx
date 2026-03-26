@@ -1,6 +1,7 @@
 <Solution>
   <Project Path="Converter/Converter.csproj" Id="e565ebce-7189-4f00-a6ca-2951b0957c08" />
   <Project Path="Dice Game/Dice Game.csproj" />
+  <Project Path="Hangman Game/Hangman Game.csproj" Id="1e7e4916-4c78-4d61-aa35-8b551910e83e" />
   <Project Path="Memory Match Game/Memory Match Game.csproj" Id="08c0266a-e0ae-4722-9f87-9fc9c2325d46" />
   <Project Path="Number Guessing Game/Number Guessing Game.csproj" />
   <Project Path="Quiz Game/Quiz Game.csproj" Id="cabe2ea7-f9d1-46a7-bbcb-22225cfe356a" />

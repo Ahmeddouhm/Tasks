@@ -7,55 +7,55 @@ Console.WriteLine("=================================");
 Random rnd = new Random();
 StringBuilder sb = new StringBuilder();
 string[] colors = { "red", "blue", "green", "yellow", "pink", "white", "black", "grey", "purple" };
-//string word = colors[rnd.Next(1, colors.Length + 1)];
-string word = colors[0];
-char userchar = ' ';
-int tries = 7;
-
-
-// print spaces equal to the length of the word
-// input from user => chars 
-// check the letter if in the word => replace it with the space
-// if wrong decrement the 7/7 health 
-
-
-//for (int i = 0; i < word.Length; i++)
-//    Console.Write("_");
+string word = colors[rnd.Next(0, colors.Length)];
+int lives = 7;
 
 sb.Append('_',word.Length);
 Console.WriteLine(sb);
+
 string temp = sb.ToString();
-while (temp.Contains('_'))
+
+while (temp.Contains('_') && lives > 0)
 {
+    Console.WriteLine($"Lives : {lives}");
     Console.Write(">> ");
     string input = (Console.ReadLine() ?? "");
+    char userchar;
+
     while (!char.TryParse(input, out userchar))
     {
         Console.Write("[ERROR] >> ");
         input = (Console.ReadLine() ?? "");
     }
-
-    int number = word.IndexOf(userchar);
+    userchar = char.ToLower(userchar);
     if (word.Contains(userchar))
     {
-        Console.WriteLine("True");
-        sb[number] = word[number];
+        Console.WriteLine("Correct ✓");
+
+        for (int i = 0; i < word.Length; i++)
+        {
+            if (word[i] == userchar)
+            {
+                sb[i] = word[i];
+            }
+        }
+
         temp = sb.ToString();
     }
     else
     {
-        Console.WriteLine("False");
-        continue;
+        Console.WriteLine("Incorrect ✗");
+        lives--;
     }
     Console.WriteLine(sb);
-
+    Console.WriteLine("=================");
 }
-Console.WriteLine("Congrats");
 
-
-
-
-
-
-
-Console.ReadKey();
+if (temp.Contains('_'))
+{
+    Console.WriteLine($"You lost! The word was: {word}");
+}
+else
+{
+    Console.WriteLine("Congrats !");
+}

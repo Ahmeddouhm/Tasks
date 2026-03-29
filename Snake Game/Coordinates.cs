@@ -17,5 +17,35 @@ namespace Snake_Game
             this._x = x;
             this._y = y;
         }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || !GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+
+            Coordinates coord = (Coordinates)obj;
+            return _x == coord._x && _y == coord._y;
+        }
+
+        public void ApplyMove(Directions direction) 
+        {
+            switch (direction)
+            {
+                case Directions.Up:
+                    _y--;
+                    break;
+                case Directions.Left:
+                    _x--;
+                    break;
+                case Directions.Down:
+                    _y++;
+                    break;
+                case Directions.Right:
+                    _x++;
+                    break;
+            }
+        }
     }
 }

@@ -46,13 +46,15 @@ while (true)
 		Console.WriteLine();
 	}
 
+	// eating logic
 	if (snakePos.Equals(applePos))
 	{
 		tail++;
 		score++;
 		applePos = new Coordinates(rnd.Next(1, gridDimensions.X - 1), rnd.Next(1, gridDimensions.Y - 1));
     }
-	else if (snakePos.X == 0 || snakePos.Y == 0 || snakePos.X == gridDimensions.X - 1|| snakePos.Y == gridDimensions.Y - 1 || snakePositionHistory.Contains(snakePos))
+    // collision logic
+    else if (snakePos.X == 0 || snakePos.Y == 0 || snakePos.X == gridDimensions.X - 1|| snakePos.Y == gridDimensions.Y - 1 || snakePositionHistory.Contains(snakePos))
 	{
 		score = 0;
 		tail = 1;

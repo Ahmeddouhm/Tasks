@@ -4,6 +4,7 @@
   <Project Path="Hangman Game/Hangman Game.csproj" Id="1e7e4916-4c78-4d61-aa35-8b551910e83e" />
   <Project Path="Memory Match Game/Memory Match Game.csproj" Id="08c0266a-e0ae-4722-9f87-9fc9c2325d46" />
   <Project Path="Number Guessing Game/Number Guessing Game.csproj" />
+  <Project Path="Password Manager/Password Manager.csproj" Id="1ab5fbc3-2341-4a09-a83c-ad78c58a1a68" />
   <Project Path="Quiz Game/Quiz Game.csproj" Id="cabe2ea7-f9d1-46a7-bbcb-22225cfe356a" />
   <Project Path="Random Values Generator/Random Values Generator.csproj" Id="14d3523d-3e2b-438c-89d8-da62f3000e03" />
   <Project Path="RPS Game/RPS Game.csproj" Id="cd1fd248-c120-4237-9a70-053687004552" />

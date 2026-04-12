@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Password_Manager;
 
 Console.WriteLine("=======================================");
 Console.WriteLine("      Welcome To Password Manager      ");
@@ -29,18 +30,33 @@ while (!isFinished)
             break;
         case "9":
             isFinished = true;
-        break;
+            break;
     }
 }
-
-
+void ReadPasswords()
+{
+    if (File.Exists("passwords.txt"))
+    {
+        string lines = File.ReadAllText("passwords.txt");
+        foreach (var line in lines.Split(Environment.NewLine))
+        {
+            if (!string.IsNullOrEmpty(line))
+            {
+                int equalIdx = line.IndexOf('=');
+                string webName = line.Substring(0, equalIdx);
+                string password = line.Substring(equalIdx + 1);
+                passwords.Add(webName, Encryption.Decrypt(password));
+            }
+        }
+    }
+}
 
 void SavePasswords()
 {
     StringBuilder sb = new StringBuilder();
     foreach (var entry in passwords)
     {
-        sb.AppendLine($"{entry.Key}={entry.Value}");
+        sb.AppendLine($"{entry.Key}={Encryption.Encrypt(entry.Value)}");
     }
     File.WriteAllText("passwords.txt", sb.ToString());
 }
@@ -98,23 +114,6 @@ void AddOrChangePasswords()
 
     }
     SavePasswords();
-}
-void ReadPasswords() 
-{
-    if (File.Exists("passwords.txt"))
-    {
-        string lines = File.ReadAllText("passwords.txt");
-        foreach (var line in lines.Split(Environment.NewLine))
-        {
-            if (!string.IsNullOrEmpty(line))
-            {
-                int equalIdx = line.IndexOf('=');
-                string webName = line.Substring(0, equalIdx);
-                string password = line.Substring(equalIdx + 1);
-                passwords.Add(webName, password);
-            }
-        }
-    }
 }
 
 void ListPasswords()

@@ -45,7 +45,7 @@ void ReadPasswords()
                 int equalIdx = line.IndexOf('=');
                 string webName = line.Substring(0, equalIdx);
                 string password = line.Substring(equalIdx + 1);
-                passwords.Add(webName, Encryption.Decrypt(password));
+                passwords.Add(webName, Encryption.CesarCipherDecryption(password));
             }
         }
     }
@@ -56,7 +56,7 @@ void SavePasswords()
     StringBuilder sb = new StringBuilder();
     foreach (var entry in passwords)
     {
-        sb.AppendLine($"{entry.Key}={Encryption.Encrypt(entry.Value)}");
+        sb.AppendLine($"{entry.Key}={Encryption.CesarCipherEncryption(entry.Value)}");
     }
     File.WriteAllText("passwords.txt", sb.ToString());
 }

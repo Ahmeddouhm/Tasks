@@ -15,7 +15,7 @@ namespace Math_Expression_Evaluator_v2._0
 
             for (int i = 0; i < input.Length; i++)
             {
-                var currChar = input[i];
+                char currChar = input[i];
 
                 if (char.IsDigit(currChar))
                 {
@@ -28,10 +28,11 @@ namespace Math_Expression_Evaluator_v2._0
                 }
                 else if (char.IsLetter(currChar)) 
                 {
+                    // matches with (mod/pow/sin/cos/tan) conditions
                     token += currChar;
                     leftSideInitialized = true;
                 }
-                else if (currChar == ' ') 
+                else if (char.IsWhiteSpace(currChar)) 
                 {
                     if (!leftSideInitialized)
                     {

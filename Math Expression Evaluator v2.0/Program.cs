@@ -54,6 +54,6 @@ switch (operation)
         Console.WriteLine($"Cos({rightSideOp}) = {Math.Cos(rightSideOp)}");
         break;
     case MathOperation.Tan:
-        Console.WriteLine($"Tan({rightSideOp}) = {Math.Cos(rightSideOp)}");
+        Console.WriteLine($"Tan({rightSideOp}) = {Math.Tan(rightSideOp)}");
         break;
 }

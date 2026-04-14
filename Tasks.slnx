@@ -2,6 +2,7 @@
   <Project Path="Converter/Converter.csproj" Id="e565ebce-7189-4f00-a6ca-2951b0957c08" />
   <Project Path="Dice Game/Dice Game.csproj" />
   <Project Path="Hangman Game/Hangman Game.csproj" Id="1e7e4916-4c78-4d61-aa35-8b551910e83e" />
+  <Project Path="Inventory Management System/Inventory Management System.csproj" Id="d179ebb4-bfa7-448f-982f-22fda6f970bc" />
   <Project Path="Math Expression Evaluator v2.0/Math Expression Evaluator v2.0.csproj" Id="d38ce226-4202-4786-a8f7-b0dc50f031cf" />
   <Project Path="Memory Match Game/Memory Match Game.csproj" Id="08c0266a-e0ae-4722-9f87-9fc9c2325d46" />
   <Project Path="Number Guessing Game/Number Guessing Game.csproj" />

@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/OOP Tasks/">
+    <Project Path="Library Management System/Library Management System.csproj" Id="abc7afb9-6765-4598-a852-68f49be81f3d" />
+  </Folder>
   <Project Path="Converter/Converter.csproj" Id="e565ebce-7189-4f00-a6ca-2951b0957c08" />
   <Project Path="Dice Game/Dice Game.csproj" />
   <Project Path="Hangman Game/Hangman Game.csproj" Id="1e7e4916-4c78-4d61-aa35-8b551910e83e" />

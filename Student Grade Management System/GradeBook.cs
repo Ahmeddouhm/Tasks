@@ -25,5 +25,82 @@ namespace Student_Grade_Management_System
 
     internal class GradeBook
     {
+        public string ClassName { get; set; }
+
+        public List<Student> Students { get; set; }
+
+        public GradeBook(string className)
+        {
+            this.ClassName = className;
+            Students = new List<Student>();
+        }
+
+        public void AddStudent(Student student) 
+        {
+            Students.Add(student);
+        }
+
+        public void RemoveStudent(string studentID) 
+        {
+            if (Students.Count == 0)
+            {
+                Console.WriteLine("[ERROR] Empty Students List");
+                return;
+            }
+
+            foreach (var student in Students)
+            {
+                if (studentID == null)
+                {
+                    Console.WriteLine("[ERROR] Please Enter Student ID");
+                    return;
+                }
+
+                if (student.StudentID == studentID)
+                {
+                    Students.Remove(student);
+                }
+            }
+        }
+
+        public Student? FindStudent(string studentId) 
+        {
+
+            foreach (var student in Students)
+            {
+                if (student.StudentID == studentId)
+                {
+                    return student;
+                }
+            }
+
+            return null;
+        }
+
+        public double GetClassAverage()
+        {
+            var classcount = Students.Count;
+            double sum = 0d;
+
+            foreach (var student in Students)
+                sum += student.CalculateAverage();
+            
+            return sum / classcount;
+        }
+
+        public List<Student> GetTopStudents(int count)
+        {
+            var topStudentsList = new List<KeyValuePair<Student, double>>();
+
+            foreach (var student in Students)
+            {
+                var avg = student.CalculateAverage();
+                topStudentsList.Add(new KeyValuePair<Student, double>(student, avg));
+            }
+
+            topStudentsList.Sort((a, b) => b.Value.CompareTo(a.Value));
+
+
+        }
     }
 }

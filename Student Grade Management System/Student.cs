@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 
 namespace Student_Grade_Management_System
@@ -23,6 +24,80 @@ namespace Student_Grade_Management_System
     */
     internal class Student
     {
+        public string StudentID { get; set; }
+        public string StudentName { get; set; }
+        public string StudentEmail { get; set; }
+        public Dictionary<string, double> Grades { get; set; }
 
+        public Student(string id , string name , string email)
+        {
+            StudentID = id;
+            StudentName = name;
+            StudentEmail = email;
+            Grades = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);
+        }
+
+        public void AddGrade(string subject , double grade) 
+        {
+            if (string.IsNullOrEmpty(subject))
+            {
+                Console.WriteLine("[ERROR] Empty Subject Value !");
+                return;
+            }
+
+            if (grade < 0 || grade > 100)
+            {
+                Console.WriteLine("[ERROR] Wrong Grade Value !");
+                return;
+            }
+
+            Grades[subject] = grade;
+        }
+
+        public double GetGrade(string subject) 
+        {
+            if (Grades.TryGetValue(subject , out double grade))
+            {
+                return grade;
+            }
+
+            Console.WriteLine("[ERROR] Subject Not Found !");
+            return -1;
+        }
+
+        public double CalculateAverage() 
+        {
+            return Grades.Values.Average();
+        }
+
+        public string GetLetterGrade() 
+        {
+            if (Grades.Count == 0)
+                return "N/A";
+
+            var avgGrades = CalculateAverage();
+
+            return avgGrades switch
+            {
+                >= 90 => "A",
+                >= 80 => "B",
+                >= 70 => "C",
+                >= 60 => "D",
+                _ => "F"
+            };
+        }
+
+        public void GetStudentInfo() 
+        {
+            Console.WriteLine($"{StudentName}");
+            Console.WriteLine("============");
+            Console.WriteLine($"ID : {StudentID}");
+            Console.WriteLine($"E-Mail : {StudentEmail}");
+            Console.WriteLine("============");
+            foreach (var grade in Grades)
+            {
+                Console.WriteLine($"{grade.Key} : {grade.Value}");
+            }
+        }
     }
 }

@@ -29,15 +29,19 @@ namespace Student_Grade_Management_System
 
         public List<Student> Students { get; set; }
 
+        public Dictionary<Student, float> StudentAvg { get; set; }
+
         public GradeBook(string className)
         {
             this.ClassName = className;
             Students = new List<Student>();
+            StudentAvg = new Dictionary<Student, float>();
         }
 
         public void AddStudent(Student student) 
         {
             Students.Add(student);
+            StudentAvg[student] = student.CalculateAverage();
         }
 
         public void RemoveStudent(string studentID) 
@@ -77,10 +81,10 @@ namespace Student_Grade_Management_System
             return null;
         }
 
-        public double GetClassAverage()
+        public float GetClassAverage()
         {
             var classcount = Students.Count;
-            double sum = 0d;
+            float sum = 0f;
 
             foreach (var student in Students)
                 sum += student.CalculateAverage();
@@ -90,17 +94,52 @@ namespace Student_Grade_Management_System
 
         public List<Student> GetTopStudents(int count)
         {
-            var topStudentsList = new List<KeyValuePair<Student, double>>();
+            var tempList = new List<(Student s, float avg)>();
 
             foreach (var student in Students)
             {
-                var avg = student.CalculateAverage();
-                topStudentsList.Add(new KeyValuePair<Student, double>(student, avg));
+                var avg = StudentAvg[student];
+                tempList.Add((student , avg));
             }
 
-            topStudentsList.Sort((a, b) => b.Value.CompareTo(a.Value));
+            // DESC bubble sort 
+            for (int i = 0; i < tempList.Count - 1; i++)
+            {
+                for (int j = 0; j < tempList.Count - i - 1; j++)
+                {
+                    if (tempList[j].avg < tempList[j+1].avg)
+                    {
+                        (tempList[j], tempList[j + 1]) = (tempList[j + 1], tempList[j]);
+                    }
+                }
+            }
 
+            var topStudentList = new List<Student>();
 
+            for (int i = 0; i < count; i++)
+            {
+                topStudentList.Add(tempList[i].s);
+            }
+
+            return topStudentList;
+        }
+
+        public void DisplayAllStudents()
+        {
+            Console.WriteLine("Students Averages");
+            Console.WriteLine("=================");
+            foreach (var student in StudentAvg)
+            {
+                foreach (var avg in StudentAvg.Values)
+                {
+                    Console.WriteLine($"{student.Key.StudentName} : {avg:F2}");
+                }
+            }
+        }
+
+        public List<Student> GetStudentsByLetterGrade(string letterGrade) 
+        {
+            
         }
     }
 }

@@ -27,17 +27,17 @@ namespace Student_Grade_Management_System
         public string StudentID { get; set; }
         public string StudentName { get; set; }
         public string StudentEmail { get; set; }
-        public Dictionary<string, double> Grades { get; set; }
+        public Dictionary<string, float> Grades { get; set; }
 
         public Student(string id , string name , string email)
         {
             StudentID = id;
             StudentName = name;
             StudentEmail = email;
-            Grades = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);
+            Grades = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
         }
 
-        public void AddGrade(string subject , double grade) 
+        public void AddGrade(string subject , float grade) 
         {
             if (string.IsNullOrEmpty(subject))
             {
@@ -54,9 +54,9 @@ namespace Student_Grade_Management_System
             Grades[subject] = grade;
         }
 
-        public double GetGrade(string subject) 
+        public float GetGrade(string subject) 
         {
-            if (Grades.TryGetValue(subject , out double grade))
+            if (Grades.TryGetValue(subject , out float grade))
             {
                 return grade;
             }
@@ -65,7 +65,7 @@ namespace Student_Grade_Management_System
             return -1;
         }
 
-        public double CalculateAverage() 
+        public float CalculateAverage() 
         {
             return Grades.Values.Average();
         }
@@ -99,5 +99,6 @@ namespace Student_Grade_Management_System
                 Console.WriteLine($"{grade.Key} : {grade.Value}");
             }
         }
+
     }
 }

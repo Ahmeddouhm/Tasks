@@ -89,15 +89,16 @@ namespace Student_Grade_Management_System
 
         public void GetStudentInfo() 
         {
-            Console.WriteLine($"{StudentName}");
-            Console.WriteLine("============");
+            Console.WriteLine("=== Student Information ===");
             Console.WriteLine($"ID : {StudentID}");
-            Console.WriteLine($"E-Mail : {StudentEmail}");
-            Console.WriteLine("============");
+            Console.WriteLine($"Name : {StudentName}");
+            Console.WriteLine($"Email : {StudentEmail}");
+            Console.WriteLine("Grades :");
             foreach (var grade in Grades)
             {
-                Console.WriteLine($"{grade.Key} : {grade.Value}");
+                Console.WriteLine($"    {grade.Key} : {grade.Value}");
             }
+            Console.WriteLine($"Average : {CalculateAverage():F2}");
         }
 
     }

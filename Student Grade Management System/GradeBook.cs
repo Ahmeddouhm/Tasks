@@ -126,20 +126,16 @@ namespace Student_Grade_Management_System
 
         public void DisplayAllStudents()
         {
-            Console.WriteLine("Students Averages");
-            Console.WriteLine("=================");
+            Console.WriteLine($"=== {ClassName} - All Students ===");
             foreach (var student in StudentAvg)
             {
-                foreach (var avg in StudentAvg.Values)
-                {
-                    Console.WriteLine($"{student.Key.StudentName} : {avg:F2}");
-                }
+                Console.WriteLine($"{student.Key.StudentID} - {student.Key.StudentName} : {student.Value:F2} ({student.Key.GetLetterGrade()})");
             }
         }
 
-        public List<Student> GetStudentsByLetterGrade(string letterGrade) 
-        {
+        //public List<Student> GetStudentsByLetterGrade(string letterGrade) 
+        //{
             
-        }
+        //}
     }
 }

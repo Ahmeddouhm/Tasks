@@ -29,9 +29,6 @@ namespace Student_Grade_Management_System
 
         public List<Student> Students { get; set; } = new List<Student>();
 
-        public Dictionary<Student, float> StudentAvg { get; set; } = new Dictionary<Student, float>();
-
-
         public GradeBook(string className)
         {
             this.ClassName = className;
@@ -40,7 +37,6 @@ namespace Student_Grade_Management_System
         public void AddStudent(Student student) 
         {
             Students.Add(student);
-            StudentAvg[student] = student.CalculateAverage();
         }
 
         public void RemoveStudent(string studentID) 
@@ -97,7 +93,7 @@ namespace Student_Grade_Management_System
 
             foreach (var student in Students)
             {
-                var avg = StudentAvg[student];
+                var avg = student.CalculateAverage();
                 tempList.Add((student , avg));
             }
 
@@ -126,9 +122,9 @@ namespace Student_Grade_Management_System
         public void DisplayAllStudents()
         {
             Console.WriteLine($"=== {ClassName} - All Students ===");
-            foreach (var student in StudentAvg)
+            foreach (var student in Students)
             {
-                Console.WriteLine($"{student.Key.StudentID} - {student.Key.StudentName} : {student.Value:F2} ({student.Key.GetLetterGrade()})");
+                Console.WriteLine($"{student.StudentID} - {student.StudentName} : {student.CalculateAverage():F2} ({student.GetLetterGrade()})");
             }
         }
 
@@ -137,15 +133,27 @@ namespace Student_Grade_Management_System
             var letterGradeList = new List<Student>();
 
             Console.WriteLine($"=== Students With Grade ({letterGrade}) ===");
-            foreach (var student in StudentAvg)
+            foreach (var student in Students)
             {
-                if (student.Key.GetLetterGrade() == letterGrade)
+                if (student.GetLetterGrade() == letterGrade)
                 {
-                    letterGradeList.Add(student.Key);
+                    letterGradeList.Add(student);
                 }
             }
 
             return letterGradeList ?? new List<Student>();
+        }
+
+        public void ExportReport(string filePath) 
+        {
+            StringBuilder reportContent = new StringBuilder();
+            reportContent.AppendLine($"{this.ClassName} Report - {DateTime.Today:d}");
+            reportContent.AppendLine("==============");
+            foreach (var student in Students)
+            {
+                reportContent.AppendLine($"{student.StudentID} - {student.StudentName} : {student.CalculateAverage():F2} ({student.GetLetterGrade()})");
+            }
+            File.WriteAllText(filePath, reportContent.ToString());
         }
     }
 }

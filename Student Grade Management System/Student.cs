@@ -24,11 +24,11 @@ namespace Student_Grade_Management_System
     */
     internal class Student
     {
-        public const int TotalAttendanceDays = 50;
+        public const float TotalAttendanceDays = 50f;
         public string StudentID { get; set; }
         public string StudentName { get; set; }
         public string StudentEmail { get; set; }
-        public int AttendaceDays { get; set; }
+        public int  AttendanceDays { get; set; }
         public Dictionary<string, float> Grades { get; set; } = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
         public Dictionary<string, float> SubjectsWeights { get; set; } = new();        
 
@@ -37,7 +37,7 @@ namespace Student_Grade_Management_System
             StudentID = id;
             StudentName = name;
             StudentEmail = email;
-            AttendaceDays = attendance;
+             AttendanceDays = attendance;
         }
 
         public void AddGrade(string subject , float grade) 
@@ -56,6 +56,18 @@ namespace Student_Grade_Management_System
 
             Grades[subject] = grade;
         }
+        public void AddCreditPoints(string subject, float points)
+        {
+            if (Grades.ContainsKey(subject))
+            {
+                Grades[subject] = Math.Min(100f, Grades[subject] + points);
+                Console.WriteLine($"Added {points} points to {subject}. New Grade: {Grades[subject]}");
+            }
+            else
+            {
+                Console.WriteLine($"[ERROR] Subject '{subject}' not found for student {StudentName}!");
+            }
+        }
 
         public float GetGrade(string subject) 
         {
@@ -68,7 +80,7 @@ namespace Student_Grade_Management_System
             return -1;
         }
 
-        public void SetAttendance(int attendance) => AttendaceDays = attendance;
+        public void SetAttendance(int attendance) =>  AttendanceDays = attendance;
 
         public void SetSubjectWeights(string subject , float weight) 
         {
@@ -81,41 +93,33 @@ namespace Student_Grade_Management_System
             SubjectsWeights.Add(subject, weight);
         }
 
-        public float CalculateAverage() 
+        public float CalculateAverage()
         {
             if (Grades.Count == 0)
             {
                 return 0;
             }
 
-            return Grades.Values.Average();
-        }
-        public float CalculateAverageWithAttendance() 
-        {
-            if (Grades.Count == 0)
+            float totalWeightedGrades = 0f;
+            float totalWeights = 0f;
+
+            foreach (var gradeEntry in Grades)
             {
-                return 0;
+                string subject = gradeEntry.Key;
+                float grade = gradeEntry.Value;
+
+                float weight = SubjectsWeights.TryGetValue(subject, out float w) ? w : 1f;
+
+                totalWeightedGrades += (grade * weight);
+
+                totalWeights += weight;
             }
 
-            return (float)(Grades.Values.Average()* 0.9) + (float)(((AttendaceDays/TotalAttendanceDays)*100)*0.1);
+            if (totalWeights == 0) return 0;
+
+            return (float)(totalWeightedGrades / totalWeights * 0.9) + (float)((( AttendanceDays/TotalAttendanceDays) * 100) * 0.1);
         }
-        public float CalculateHighestAverage() 
-        {
-            if (Grades.Count == 0)
-            {
-                return 0;
-            }
-
-            var gradesList = Grades.Values.ToList();
-
-            if (Grades.Count > 1)
-            {
-                gradesList.Remove(gradesList.Min());
-            }
-
-            return gradesList.Average();
-        }
-
+        
         public string GetLetterGrade() 
         {
             if (Grades.Count == 0)
@@ -132,6 +136,7 @@ namespace Student_Grade_Management_System
                 _ => "F"
             };
         }
+
 
         public void GetStudentInfo() 
         {

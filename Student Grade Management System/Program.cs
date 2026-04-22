@@ -1,10 +1,11 @@
 ﻿using Student_Grade_Management_System;
+
 /*
 Bonus Challenges
 
-    1- Add validation for grades (must be between 0-100)
-    2- Add a method to drop the lowest grade before calculating average
-    3- Track attendance and factor it into final grade
+    1- Add validation for grades (must be between 0-100) => DONE
+    2- Add a method to drop the lowest grade before calculating average => DONE
+    3- Track attendance and factor it into final grade => 
     4- Add weighted grades (different subjects have different weights)
     5- Generate grade reports that can be saved to a file
     6- Add support for extra credit
@@ -15,9 +16,11 @@ Bonus Challenges
 var gradeBook = new GradeBook("Computer Science 101");
 
 // Create students
-var student1 = new Student("S001", "Alice Johnson", "alice@school.com");
-var student2 = new Student("S002", "Bob Smith", "bob@school.com");
-var student3 = new Student("S003", "Charlie Brown", "charlie@school.com");
+var student1 = new Student("S001", "Alice Johnson", "alice@school.com",37);
+var student2 = new Student("S002", "Bob Smith", "bob@school.com",45);
+var student3 = new Student("S003", "Charlie Brown", "charlie@school.com",47);
+
+// Add Subjects and weights 
 
 // Add grades for students
 student1.AddGrade("Math", 95.0f);
@@ -50,6 +53,13 @@ var topStudents = gradeBook.GetTopStudents(2);
 Console.WriteLine("Top 2 Students:");
 foreach(var student in topStudents)
     Console.WriteLine(student.StudentName + ": " + student.CalculateAverage().ToString("F2"));
+Console.WriteLine();
+
+// List students with gradeletter
+var gradeLetterStudents = gradeBook.GetStudentsByLetterGrade("C");
+
+foreach(var student in gradeLetterStudents)
+    Console.WriteLine($"{student.StudentName} - ({student.GetLetterGrade()})");
 Console.WriteLine();
 
 // Get student info

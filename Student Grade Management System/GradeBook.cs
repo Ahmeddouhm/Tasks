@@ -27,15 +27,14 @@ namespace Student_Grade_Management_System
     {
         public string ClassName { get; set; }
 
-        public List<Student> Students { get; set; }
+        public List<Student> Students { get; set; } = new List<Student>();
 
-        public Dictionary<Student, float> StudentAvg { get; set; }
+        public Dictionary<Student, float> StudentAvg { get; set; } = new Dictionary<Student, float>();
+
 
         public GradeBook(string className)
         {
             this.ClassName = className;
-            Students = new List<Student>();
-            StudentAvg = new Dictionary<Student, float>();
         }
 
         public void AddStudent(Student student) 
@@ -133,9 +132,20 @@ namespace Student_Grade_Management_System
             }
         }
 
-        //public List<Student> GetStudentsByLetterGrade(string letterGrade) 
-        //{
-            
-        //}
+        public List<Student>? GetStudentsByLetterGrade(string letterGrade)
+        {
+            var letterGradeList = new List<Student>();
+
+            Console.WriteLine($"=== Students With Grade ({letterGrade}) ===");
+            foreach (var student in StudentAvg)
+            {
+                if (student.Key.GetLetterGrade() == letterGrade)
+                {
+                    letterGradeList.Add(student.Key);
+                }
+            }
+
+            return letterGradeList ?? new List<Student>();
+        }
     }
 }

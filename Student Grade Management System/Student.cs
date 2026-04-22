@@ -24,17 +24,20 @@ namespace Student_Grade_Management_System
     */
     internal class Student
     {
+        public const int TotalAttendanceDays = 50;
         public string StudentID { get; set; }
         public string StudentName { get; set; }
         public string StudentEmail { get; set; }
-        public Dictionary<string, float> Grades { get; set; }
+        public int AttendaceDays { get; set; }
+        public Dictionary<string, float> Grades { get; set; } = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
+        public Dictionary<string, float> SubjectsWeights { get; set; } = new();        
 
-        public Student(string id , string name , string email)
+        public Student(string id , string name , string email , int attendance)
         {
             StudentID = id;
             StudentName = name;
             StudentEmail = email;
-            Grades = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
+            AttendaceDays = attendance;
         }
 
         public void AddGrade(string subject , float grade) 
@@ -65,9 +68,52 @@ namespace Student_Grade_Management_System
             return -1;
         }
 
+        public void SetAttendance(int attendance) => AttendaceDays = attendance;
+
+        public void SetSubjectWeights(string subject , float weight) 
+        {
+            if (string.IsNullOrEmpty(subject))
+            {
+                Console.WriteLine("[ERROR] Empty Subject Value !");
+                return;
+            }
+
+            SubjectsWeights.Add(subject, weight);
+        }
+
         public float CalculateAverage() 
         {
+            if (Grades.Count == 0)
+            {
+                return 0;
+            }
+
             return Grades.Values.Average();
+        }
+        public float CalculateAverageWithAttendance() 
+        {
+            if (Grades.Count == 0)
+            {
+                return 0;
+            }
+
+            return (float)(Grades.Values.Average()* 0.9) + (float)(((AttendaceDays/TotalAttendanceDays)*100)*0.1);
+        }
+        public float CalculateHighestAverage() 
+        {
+            if (Grades.Count == 0)
+            {
+                return 0;
+            }
+
+            var gradesList = Grades.Values.ToList();
+
+            if (Grades.Count > 1)
+            {
+                gradesList.Remove(gradesList.Min());
+            }
+
+            return gradesList.Average();
         }
 
         public string GetLetterGrade() 

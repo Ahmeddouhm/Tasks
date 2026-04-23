@@ -2,6 +2,7 @@
   <Folder Name="/OOP Tasks/">
     <Project Path="Library Management System/Library Management System.csproj" Id="abc7afb9-6765-4598-a852-68f49be81f3d" />
     <Project Path="Student Grade Management System/Student Grade Management System.csproj" Id="b55c3154-2751-438c-b50b-1c3c6b416980" />
+    <Project Path="Vehicle Rental System/Vehicle Rental System.csproj" Id="f393fcc7-c2bb-4616-a947-8991efc3803c" />
   </Folder>
   <Project Path="Converter/Converter.csproj" Id="e565ebce-7189-4f00-a6ca-2951b0957c08" />
   <Project Path="Dice Game/Dice Game.csproj" />

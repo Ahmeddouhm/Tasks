@@ -27,5 +27,30 @@ namespace Vehicle_Rental_System
     */
     internal class Customer
     {
+        public string CustomerID { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerPhone { get; set; }
+        public string CustomerEmail { get; set; }
+        public string DriverLicenseNumber { get; set; }
+
+        public Customer(string customerID, string customerName, string customerPhone, string customerEmail, string driverLicenseNumber)
+        {
+            CustomerID = customerID;
+            CustomerName = customerName;
+            CustomerPhone = customerPhone;
+            CustomerEmail = customerEmail;
+            DriverLicenseNumber = driverLicenseNumber;
+        }
+
+        public void GetCustomerInfo()
+        {
+            Console.WriteLine($"Customer - {CustomerID}");
+            Console.WriteLine("========================");
+            Console.WriteLine($"Name: {CustomerName}");
+            Console.WriteLine($"LicenseNumber: {DriverLicenseNumber}");
+            Console.WriteLine($"Phone: {CustomerPhone}");
+            Console.WriteLine($"Email: {CustomerEmail}");
+
+        }
     }
 }

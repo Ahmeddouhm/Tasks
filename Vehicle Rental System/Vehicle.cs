@@ -38,10 +38,10 @@ namespace Vehicle_Rental_System
         public string VehicleMake { get; set; }
         public string VehicleModel { get; set; }
         public int VehicleYear { get; set; }
-        public decimal VehicleDailyRate { get; set; }
+        public double VehicleDailyRate { get; set; }
         public bool IsAvailable { get; set; }
 
-        public Vehicle(string vehicleID, string vehicleMake, string vehicleModel, int vehicleYear, decimal vehicleDailyRate, bool isAvailable)
+        public Vehicle(string vehicleID, string vehicleMake, string vehicleModel, int vehicleYear, double vehicleDailyRate, bool isAvailable)
         {
             VehicleID = vehicleID;
             VehicleMake = vehicleMake;
@@ -86,9 +86,7 @@ namespace Vehicle_Rental_System
 
         public double CalcRentalCost(int days) 
         {
-            double cost = 1200 * days;
-
-            return cost;
+            return VehicleDailyRate * days;
         }
     }
 }

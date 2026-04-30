@@ -34,5 +34,48 @@ namespace Vehicle_Rental_System
     */
     internal class Rental
     {
+        public string RentalID { get; set; }
+        public Customer Customer { get; set; }
+        public Vehicle Vehicle { get; set; }
+        public DateTime RentStartDate { get; set; }
+        public DateTime RentEndDate { get; set; }
+        public bool IsActive { get; set; }
+
+        public Rental(string rentalID, Customer customer, Vehicle vehicle, DateTime rentStartDate, DateTime rentEndDate)
+        {
+            RentalID = rentalID;
+            Customer = customer;
+            Vehicle = vehicle;
+            RentStartDate = rentStartDate;
+            RentEndDate = rentEndDate;
+        }
+
+        public int GetRentalDuration() 
+        {
+            var duration = RentEndDate - RentStartDate;
+
+            return duration.Days;
+        }
+
+        public double GetTotalCost() 
+        {
+            return Vehicle.CalcRentalCost(GetRentalDuration());
+        }
+
+        public void CompleteRental() 
+        {
+            if (!Vehicle.IsAvailable)
+            {
+                Console.WriteLine("Rent Duration Ended !");
+                Vehicle.IsAvailable = true;
+            }
+        }
+
+        public void GetRentalInfo()
+        {
+            Console.WriteLine($"Rental : {RentalID} - {IsActive}");
+            Console.WriteLine($"    By Customer {Customer.CustomerID} - {Customer.CustomerName}");
+            Console.WriteLine($"    Vehicle : {Vehicle.VehicleID} - {Vehicle.VehicleModel}/{Vehicle.VehicleYear}");
+        }
     }
 }
